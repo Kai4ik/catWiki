@@ -4,17 +4,20 @@ import customizedTheme from "../theme";
 
 import Layout from "../components/layout";
 import Hero from "../components/hero";
+
 import { graphql } from "gatsby";
 
-const IndexPage = ({ data }) => {
-  console.log(data.allCatBreeds.edges);
+import { ContextProvider } from "../context/index";
 
+const IndexPage = ({ data }) => {
   return (
-    <ChakraProvider theme={customizedTheme}>
-      <Layout>
-        <Hero />
-      </Layout>
-    </ChakraProvider>
+    <ContextProvider data={data.allCatBreeds.edges}>
+      <ChakraProvider theme={customizedTheme}>
+        <Layout>
+          <Hero />
+        </Layout>
+      </ChakraProvider>
+    </ContextProvider>
   );
 };
 

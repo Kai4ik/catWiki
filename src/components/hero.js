@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   VStack,
+  HStack,
   Container,
   Text,
   InputGroup,
@@ -11,9 +12,25 @@ import {
 import { StaticImage } from "gatsby-plugin-image";
 import { Search2Icon, ArrowForwardIcon } from "@chakra-ui/icons";
 
-const Hero = ({ data }) => {
-  const [searchValue, setSearchValue] = React.useState("");
+// app context pass to useContext hook
+import { AppContext } from "../context/index";
+
+const Hero = () => {
+  const [searchValue, setSearchValue] = useState("");
   const handleChange = (event) => setSearchValue(event.target.value);
+
+  const [dataToShow, setDataToShow] = useState([]);
+
+  // fetching catData from app context
+  const data = useContext(AppContext);
+
+  useEffect(() => {
+    const shuffledArray = data.sort(() => 0.5 - Math.random());
+    const selected = shuffledArray.slice(0, 4);
+    console.log(selected);
+    setDataToShow(selected);
+    // eslint-disable-next-line no-use-before-define
+  }, []);
 
   return (
     <VStack w="100%" borderRadius="24px" overflow="hidden">
@@ -81,6 +98,11 @@ const Hero = ({ data }) => {
             See more <ArrowForwardIcon />
           </Text>
         </Flex>
+        <HStack>
+          {dataToShow.map((el) => (
+            <p>{el.node.name}</p>
+          ))}
+        </HStack>
       </VStack>
     </VStack>
   );
