@@ -9,7 +9,7 @@ import {
   InputRightElement,
   Flex,
 } from "@chakra-ui/react";
-import { StaticImage } from "gatsby-plugin-image";
+import { StaticImage, GatsbyImage } from "gatsby-plugin-image";
 import { Search2Icon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 // app context pass to useContext hook
@@ -100,7 +100,7 @@ const Hero = () => {
         </Flex>
         <HStack>
           {dataToShow.map((el) => (
-            <p>{el.node.name}</p>
+            <GatsbyImage alt="" image={el.node.image.url} />
           ))}
         </HStack>
       </VStack>
