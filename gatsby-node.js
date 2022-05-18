@@ -15,6 +15,7 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
   `);
 };
 
+// here we use it to fetch data from API and based on it - create nodes
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
@@ -35,6 +36,7 @@ exports.sourceNodes = async ({
   });
 };
 
+// triggered every time we create the node
 exports.onCreateNode = async ({
   node,
   actions: { createNode, createNodeField },
@@ -44,16 +46,27 @@ exports.onCreateNode = async ({
   reporter,
 }) => {
   if (node.internal.type === "catBreeds") {
+    // downloads external images on GraphQL layer (disk) so we can work with them locally and query them
     const imageNode = await createRemoteFileNode({
+      // The source url of the remote file
       url: node.image.url,
+
+      // The id of the parent node (i.e. the node to which the new remote File node will be linked to.
       parentNodeId: node.id,
+
+      // The action used to create nodes
       createNode,
+
+      // A helper function for creating node Ids
       createNodeId,
+
+      // Gatsby's cache which the helper uses to check if the file has been downloaded already. It's passed to all Node APIs.
       cache,
       store,
       reporter,
     });
 
+    // if the file was created, extend the imageNode with new field - "image"
     if (imageNode) {
       createNodeField({ node, name: "image", value: imageNode.id });
     }

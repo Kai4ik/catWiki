@@ -11,7 +11,7 @@ import { ContextProvider } from "../context/index";
 
 const IndexPage = ({ data }) => {
   return (
-    <ContextProvider data={data.allCatBreeds.edges}>
+    <ContextProvider data={data.allCatBreeds.nodes}>
       <ChakraProvider theme={customizedTheme}>
         <Layout>
           <Hero />
@@ -24,13 +24,13 @@ const IndexPage = ({ data }) => {
 export const query = graphql`
   {
     allCatBreeds {
-      edges {
-        node {
-          id
-          image {
-            url
+      nodes {
+        id
+        name
+        image {
+          childImageSharp {
+            gatsbyImageData
           }
-          name
         }
       }
     }

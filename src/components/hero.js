@@ -15,7 +15,7 @@ import { Search2Icon, ArrowForwardIcon } from "@chakra-ui/icons";
 // app context pass to useContext hook
 import { AppContext } from "../context/index";
 
-const Hero = () => {
+const Hero = ({}) => {
   const [searchValue, setSearchValue] = useState("");
   const handleChange = (event) => setSearchValue(event.target.value);
 
@@ -100,7 +100,10 @@ const Hero = () => {
         </Flex>
         <HStack>
           {dataToShow.map((el) => (
-            <GatsbyImage alt="" image={el.node.image.url} />
+            <GatsbyImage
+              alt=""
+              image={el.image.childImageSharp.gatsbyImageData}
+            />
           ))}
         </HStack>
       </VStack>
