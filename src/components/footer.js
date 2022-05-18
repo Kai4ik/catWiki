@@ -4,7 +4,7 @@ import { StaticImage } from "gatsby-plugin-image";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer style={{ marginTop: "auto" }}>
       <Flex
         justify="space-between"
         bg="bgDark"

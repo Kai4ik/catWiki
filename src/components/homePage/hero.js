@@ -3,6 +3,7 @@ import {
   VStack,
   HStack,
   Container,
+  Center,
   Text,
   InputGroup,
   Input,
@@ -13,9 +14,9 @@ import { StaticImage, GatsbyImage } from "gatsby-plugin-image";
 import { Search2Icon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 // app context pass to useContext hook
-import { AppContext } from "../context/index";
+import { AppContext } from "../../context/index";
 
-const Hero = ({}) => {
+const Hero = () => {
   const [searchValue, setSearchValue] = useState("");
   const handleChange = (event) => setSearchValue(event.target.value);
 
@@ -27,34 +28,31 @@ const Hero = ({}) => {
   useEffect(() => {
     const shuffledArray = data.sort(() => 0.5 - Math.random());
     const selected = shuffledArray.slice(0, 4);
-    console.log(selected);
     setDataToShow(selected);
     // eslint-disable-next-line no-use-before-define
-  }, []);
+  }, [data]);
 
   return (
-    <VStack w="100%" borderRadius="24px" overflow="hidden">
+    <VStack w="100%" borderRadius="24px" overflow="hidden" mt={6}>
       <Container maxW="100%" pos="relative" p={0}>
         <StaticImage
           aspectRatio={3 / 1}
           alt=""
-          src={"../images/HeroImage.png"}
+          src={"../../images/HeroImage.png"}
         />
         <VStack
           pos="absolute"
           top="20%"
           left="12%"
           color="secondaryText"
-          maxW="20%"
           align="flex-start"
         >
-          <StaticImage
-            width={220}
-            src="../images/CatwikiLogoWhite.svg"
-            alt="catWiki logo"
-          />
+          <Text fontSize="6xl" fontFamily="Mystery Quest">
+            CatWiki
+          </Text>
           <Text fontSize="2xl" pb={6}>
-            Get to know more about your cat breed
+            Get to know more about your <br />
+            cat breed
           </Text>
           <InputGroup color="dark">
             <Input
@@ -86,24 +84,30 @@ const Hero = ({}) => {
         align="flex-start"
         spacing={45}
       >
-        <Text fontSize="xl" fontWeight={500}>
+        <Text fontSize="xl" fontWeight={500} cursor="pointer">
           <span style={{ borderBottom: "2px solid #291507" }}>Most </span>
-          Searched Breeds
+          Searched Breeds {"   "}
+          <ArrowForwardIcon />
         </Text>
         <Flex justify="space-between" align="center" w="100%">
-          <Text fontSize="4xl" fontWeight={700} maxW="25%">
-            66+ Breeds For you to discover
+          <Text fontSize="4xl" fontWeight={700}>
+            66+ Breeds For you <br /> to discover
           </Text>
-          <Text fontSize="xl">
+          <Text fontSize="2xl" cursor="pointer">
             See more <ArrowForwardIcon />
           </Text>
         </Flex>
-        <HStack>
+        <HStack justify="space-between" w="100%">
           {dataToShow.map((el) => (
-            <GatsbyImage
-              alt=""
-              image={el.image.childImageSharp.gatsbyImageData}
-            />
+            <VStack key={el.id} align="flex-start">
+              <Center borderRadius="24px" overflow="hidden">
+                <GatsbyImage
+                  alt={el.name}
+                  image={el.image.childImageSharp.gatsbyImageData}
+                />
+              </Center>
+              <Text> {el.name} </Text>
+            </VStack>
           ))}
         </HStack>
       </VStack>

@@ -3,7 +3,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import customizedTheme from "../theme";
 
 import Layout from "../components/layout";
-import Hero from "../components/hero";
+import Hero from "../components/homePage/hero";
+import Main from "../components/homePage/main";
 
 import { graphql } from "gatsby";
 
@@ -11,13 +12,14 @@ import { ContextProvider } from "../context/index";
 
 const IndexPage = ({ data }) => {
   return (
-    <ContextProvider data={data.allCatBreeds.nodes}>
-      <ChakraProvider theme={customizedTheme}>
+    <ChakraProvider theme={customizedTheme}>
+      <ContextProvider data={data.allCatBreeds.nodes}>
         <Layout>
           <Hero />
+          <Main />
         </Layout>
-      </ChakraProvider>
-    </ContextProvider>
+      </ContextProvider>
+    </ChakraProvider>
   );
 };
 
@@ -29,7 +31,7 @@ export const query = graphql`
         name
         image {
           childImageSharp {
-            gatsbyImageData
+            gatsbyImageData(height: 260, aspectRatio: 1.2)
           }
         }
       }
