@@ -1,25 +1,14 @@
-import * as React from "react";
-import { ChakraProvider } from "@chakra-ui/react";
-import customizedTheme from "../theme";
-
-import Layout from "../components/layout";
-import Hero from "../components/homePage/hero";
-import Main from "../components/homePage/main";
+import React from "react";
+import Index from "../components/homePage/index";
 
 import { graphql } from "gatsby";
-
 import { ContextProvider } from "../context/index";
 
 const IndexPage = ({ data }) => {
   return (
-    <ChakraProvider theme={customizedTheme}>
-      <ContextProvider data={data.allCatBreeds.nodes}>
-        <Layout>
-          <Hero />
-          <Main />
-        </Layout>
-      </ContextProvider>
-    </ChakraProvider>
+    <ContextProvider data={data.allCatBreeds.nodes}>
+      <Index />
+    </ContextProvider>
   );
 };
 
@@ -31,7 +20,7 @@ export const query = graphql`
         name
         image {
           childImageSharp {
-            gatsbyImageData(height: 260, aspectRatio: 1.2)
+            gatsbyImageData(height: 280, aspectRatio: 1.2)
           }
         }
       }

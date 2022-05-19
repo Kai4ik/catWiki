@@ -7,8 +7,8 @@ const Layout = ({ children }) => {
   return (
     <Container
       maxW="container.xl"
-      p={12}
-      pb={0}
+      paddingX={35}
+      pt={8}
       minHeight="100vh"
       display="flex"
       flexDirection="column"

@@ -2,10 +2,11 @@ import React from "react";
 import { VStack, HStack, Text, Grid, GridItem } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { StaticImage } from "gatsby-plugin-image";
+import { Link } from "gatsby";
 
 const Main = () => {
   return (
-    <HStack w="100%" marginY="100px" paddingX="12%" align="flex-start">
+    <HStack w="100%" marginY="100px" paddingX="8%" align="flex-start">
       <VStack w="45%" align="flex-start" spacing={8} mt="10%" color="dark">
         <Text fontSize="4xl" fontWeight={700}>
           <span style={{ borderTop: "4px solid #4D270C", paddingTop: "10px" }}>
@@ -18,8 +19,15 @@ const Main = () => {
           Having a cat around you actually trigger the release of calming
           chemicals in your body which lower your stress and anxiety levels
         </Text>
-        <Text fontSize="2xl" pt={10} cursor="pointer">
-          Read more <ArrowForwardIcon />
+        <Text
+          fontSize="2xl"
+          pt={10}
+          cursor="pointer"
+          _hover={{ borderBottom: "2px solid #291507" }}
+        >
+          <Link to="https://www.mentalfloss.com/article/51154/10-scientific-benefits-being-cat-owner">
+            Read more <ArrowForwardIcon />
+          </Link>
         </Text>
       </VStack>
       <Grid

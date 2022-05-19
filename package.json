@@ -20,6 +20,7 @@
     "@chakra-ui/react": "^1.6.2",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "chakra-ui-simple-autocomplete": "^1.0.0",
     "framer-motion": "^6.3.3",
     "gatsby": "^4.14.0",
     "gatsby-background-image": "^1.6.0",
