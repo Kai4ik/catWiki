@@ -6,14 +6,21 @@ const Footer = () => {
   return (
     <footer style={{ marginTop: "auto" }}>
       <Flex
+        flexDirection={["column", "row"]}
         justify="space-between"
         bg="bgDark"
         color="secondaryText"
         borderTopRadius="42px"
         p={8}
         pl={12}
+        gridRowGap="14px"
       >
-        <StaticImage src="../images/CatwikiLogoWhite.svg" alt="catWiki logo" />
+        <StaticImage
+          src="../images/CatwikiLogoWhite.svg"
+          alt="catWiki logo"
+          objectPosition="left"
+          objectFit="contain"
+        />
         <HStack spacing="6px">
           <span dangerouslySetInnerHTML={{ __html: "&copy;" }} />
           <Text>created by</Text>

@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import {
   VStack,
-  HStack,
   Container,
   Center,
   Text,
@@ -22,44 +21,43 @@ const Hero = () => {
   const [searchValue, setSearchValue] = useState("");
   const handleChange = (event) => setSearchValue(event.target.value);
 
-  // 4 cat breeds that will be shown on the page (all time different ones - chosen randomly)
-  const [dataToShow, setDataToShow] = useState([]);
-
   // determines whether to show container with available options or not
   const [showSelectionHelper, setShowSelectionHelper] = useState(false);
 
   // fetching catData from app context
   const data = useContext(AppContext);
 
+  const generateCatData = (data) =>
+    data.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+  // 4 cat breeds that will be shown on the page (all time different ones - chosen randomly)
+  const dataToShow = useMemo(() => generateCatData(data), [data]);
+
   // all cat breeds
-  const initialOptions = data.map((breed) => breed.name);
+  const initialOptions = data.map((breed) => {
+    return { id: breed.id, breedName: breed.name };
+  });
 
   // available options (cat breeds) that match entered by user value
   const [options, setOptions] = useState(initialOptions);
 
-  useEffect(() => {
-    const shuffledArray = data.sort(() => 0.5 - Math.random());
-    const selected = shuffledArray.slice(0, 4);
-    setDataToShow(selected);
-    // eslint-disable-next-line no-use-before-define
-  }, [data]);
-
   // whenever user changes value of input box, options updated
   useEffect(() => {
     const availableOptions = initialOptions.filter((option) =>
-      option.toLowerCase().includes(searchValue.toLowerCase())
+      option.breedName.toLowerCase().includes(searchValue.toLowerCase())
     );
     setOptions(searchValue.length > 0 ? availableOptions : initialOptions);
-    // eslint-disable-next-line no-use-before-define
-  }, [searchValue, initialOptions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
 
   return (
     <VStack w="100%" borderRadius="24px" overflow="hidden" mt={6}>
-      <Container maxW="100%" pos="relative" p={0}>
+      <Container maxW="100%" pos="relative" p={0} h={["400px", "600px"]}>
         <StaticImage
-          aspectRatio={3 / 1}
+          aspectRatio={4 / 2}
           alt=""
           src={"../../images/HeroImage.png"}
+          style={{ height: "100%" }}
         />
         <VStack
           pos="absolute"
@@ -68,7 +66,7 @@ const Hero = () => {
           color="secondaryText"
           align="flex-start"
         >
-          <Text fontSize="6xl" fontFamily="Mystery Quest">
+          <Text fontSize={["3xl", "6xl"]} fontFamily="Mystery Quest">
             CatWiki
           </Text>
           <Text fontSize="2xl" pb={6}>
@@ -127,16 +125,19 @@ const Hero = () => {
                 },
               }}
             >
-              {options.sort().map((option) => (
-                <Text
-                  fontSize="lg"
-                  borderRadius="6px"
-                  paddingX={4}
-                  _hover={{ backgroundColor: "rgba(151, 151, 151, 0.1)" }}
-                >
-                  {option}
-                </Text>
-              ))}
+              {options
+                .sort((a, b) => a.breedName.localeCompare(b.breedName))
+                .map((option) => (
+                  <Text
+                    fontSize="lg"
+                    borderRadius="6px"
+                    paddingX={4}
+                    _hover={{ backgroundColor: "rgba(151, 151, 151, 0.1)" }}
+                    key={option.id}
+                  >
+                    {option.breedName}
+                  </Text>
+                ))}
             </Flex>
           )}
         </VStack>
@@ -156,12 +157,17 @@ const Hero = () => {
           Searched Breeds {"   "}
           <ArrowForwardIcon />
         </Text>
-        <Flex justify="space-between" align="center" w="100%">
-          <Text fontSize="4xl" fontWeight={700}>
-            63+ Breeds For you <br /> to discover
+        <Flex
+          justify="space-between"
+          align={["flex-start", "center"]}
+          w="100%"
+          flexDirection={["column", "row"]}
+        >
+          <Text fontSize={["3xl", "4xl"]} fontWeight={700}>
+            63+ Breeds For you to discover
           </Text>
           <Text
-            fontSize="2xl"
+            fontSize={["xl", "2xl"]}
             cursor="pointer"
             _hover={{ borderBottom: "2px solid #291507" }}
           >
@@ -170,21 +176,33 @@ const Hero = () => {
             </Link>
           </Text>
         </Flex>
-        <HStack justify="space-between" w="100%">
+        <Flex
+          justify="space-between"
+          w="100%"
+          wrap={["wrap", "nowrap"]}
+          gridRowGap="30px"
+        >
           {dataToShow.map((el) => (
-            <VStack key={el.id} align="flex-start">
-              <Center borderRadius="24px" overflow="hidden" cursor="pointer">
-                <GatsbyImage
-                  alt={el.name}
-                  image={el.image.childImageSharp.gatsbyImageData}
-                />
-              </Center>
-              <Text color="dark" fontWeight="600" fontSize="xl" pl="8px">
-                {el.name}
-              </Text>
+            <VStack key={el.id} align="flex-start" w="45%">
+              <Link to={`/breed-${el.id}`}>
+                <Center borderRadius="24px" overflow="hidden" cursor="pointer">
+                  <GatsbyImage
+                    alt={el.name}
+                    image={el.image.childImageSharp.gatsbyImageData}
+                  />
+                </Center>
+                <Text
+                  color="dark"
+                  fontWeight="600"
+                  fontSize={["md", "xl"]}
+                  pl="8px"
+                >
+                  {el.name}
+                </Text>
+              </Link>
             </VStack>
           ))}
-        </HStack>
+        </Flex>
       </VStack>
     </VStack>
   );

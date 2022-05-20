@@ -6,8 +6,8 @@ import { Container } from "@chakra-ui/react";
 const Layout = ({ children }) => {
   return (
     <Container
-      maxW="container.xl"
-      paddingX={35}
+      maxW={["100vw", "container.xl"]}
+      paddingX={[5, 35]}
       pt={8}
       minHeight="100vh"
       display="flex"
