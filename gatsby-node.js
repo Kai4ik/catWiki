@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const path = require(`path`);
 const { createRemoteFileNode } = require("gatsby-source-filesystem");
 
 exports.onPostBuild = ({ reporter }) => {
@@ -22,7 +23,8 @@ exports.sourceNodes = async ({
 }) => {
   const response = await fetch("https://api.thecatapi.com/v1/breeds");
   const data = await response.json();
-  data.forEach(async (item) => {
+
+  data.forEach((item) => {
     if (item.image && Object.keys(item.image).length !== 0) {
       createNode({
         ...item,
@@ -71,4 +73,52 @@ exports.onCreateNode = async ({
       createNodeField({ node, name: "image", value: imageNode.id });
     }
   }
+};
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const breedPage = path.resolve("src/components/breedPage.js");
+
+  const breeds = await graphql(
+    `
+      query loadPagesQuery($limit: Int!) {
+        allCatBreeds(limit: $limit) {
+          nodes {
+            name
+            id
+            description
+            temperament
+            origin
+            life_span
+            adaptability
+            affection_level
+            grooming
+            child_friendly
+            intelligence
+            health_issues
+            social_needs
+            stranger_friendly
+            image {
+              childImageSharp {
+                gatsbyImageData(height: 500)
+              }
+            }
+          }
+        }
+      }
+    `,
+    { limit: 1000 }
+  );
+
+  breeds.data.allCatBreeds.nodes.map((el) => {
+    createPage({
+      path: `/breed-${el.id}`,
+      component: breedPage,
+
+      // Send additional data to page component
+      context: {
+        breedInfo: el,
+      },
+    });
+  });
 };
