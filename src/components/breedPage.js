@@ -46,7 +46,13 @@ const BreedPage = (props) => {
       cursor="pointer"
       marginY={14}
     >
-      <Container m={0} p={[4, 0]} borderRadius="24px" overflow="hidden">
+      <Container
+        m={0}
+        p={0}
+        borderRadius="24px"
+        overflow="hidden"
+        maxW={["90%", "40%"]}
+      >
         <GatsbyImage
           alt={name}
           image={imageData}
@@ -55,9 +61,9 @@ const BreedPage = (props) => {
       </Container>
       <VStack
         align="flex-start"
-        w={["100%", "70%"]}
+        w={["94%", "70%"]}
         spacing={8}
-        paddingX={[4, 16]}
+        paddingX={[2, 16]}
       >
         <Text fontSize="4xl" color="dark" fontWeight="600">
           {name}
@@ -89,6 +95,7 @@ const BreedPage = (props) => {
             <HStack spacing={4}>
               {Array.from([1, 2, 3, 4, 5], (v) => (
                 <Box
+                  key={v}
                   h="12px"
                   w={["50px", "60px"]}
                   borderRadius="8px"

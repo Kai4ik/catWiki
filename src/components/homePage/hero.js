@@ -12,6 +12,7 @@ import {
 import { StaticImage, GatsbyImage } from "gatsby-plugin-image";
 import { Search2Icon, ArrowForwardIcon } from "@chakra-ui/icons";
 import { Link } from "gatsby";
+import { navigate } from "gatsby";
 
 // app context pass to useContext hook
 import { AppContext } from "../../context/index";
@@ -73,73 +74,79 @@ const Hero = () => {
             Get to know more about your <br />
             cat breed
           </Text>
-          <InputGroup color="dark">
-            <Input
-              type="text"
-              borderRadius="60px"
-              bg="#fff"
-              focusBorderColor="none"
-              size="lg"
-              value={searchValue}
-              onChange={handleChange}
-              onFocus={() => setShowSelectionHelper(true)}
-              onBlur={() => setShowSelectionHelper(false)}
-              placeholder="Enter your breed"
-              _placeholder={{ color: "inherit" }}
-            />
-            <InputRightElement
-              top="10%"
-              pointerEvents="none"
-              children={<Search2Icon />}
-            />
-          </InputGroup>
-          {showSelectionHelper && (
-            <Flex
-              bg="#fff"
-              color="#000"
-              flexDirection="column"
-              w="100%"
-              paddingY={2}
-              paddingX={4}
-              borderRadius="24px"
-              cursor="pointer"
-              h="120px"
-              overflowY="scroll"
-              css={{
-                "&::-webkit-scrollbar": {
-                  width: "20px",
-                },
+          <VStack
+            spacing={4}
+            w="100%"
+            onMouseEnter={() => setShowSelectionHelper(true)}
+            onMouseLeave={() => setShowSelectionHelper(false)}
+          >
+            <InputGroup color="dark">
+              <Input
+                type="text"
+                borderRadius="60px"
+                bg="#fff"
+                focusBorderColor="none"
+                size="lg"
+                value={searchValue}
+                onChange={handleChange}
+                placeholder="Enter your breed"
+                _placeholder={{ color: "inherit" }}
+              />
+              <InputRightElement
+                top="10%"
+                pointerEvents="none"
+                children={<Search2Icon />}
+              />
+            </InputGroup>
+            {showSelectionHelper && (
+              <Flex
+                bg="#fff"
+                color="#000"
+                flexDirection="column"
+                w="100%"
+                paddingY={2}
+                paddingX={4}
+                borderRadius="24px"
+                cursor="pointer"
+                h="120px"
+                overflowY="scroll"
+                css={{
+                  "&::-webkit-scrollbar": {
+                    width: "20px",
+                  },
 
-                "&::-webkit-scrollbar-track": {
-                  boxShadow: "inset 0 0 40px 40px rgba(151, 151, 151, 0.1)",
-                  borderTop: "solid 6px transparent",
-                  borderBottom: "solid 6px transparent",
-                  borderRight: "solid 14px transparent",
-                },
+                  "&::-webkit-scrollbar-track": {
+                    boxShadow: "inset 0 0 40px 40px rgba(151, 151, 151, 0.1)",
+                    borderTop: "solid 6px transparent",
+                    borderBottom: "solid 6px transparent",
+                    borderRight: "solid 14px transparent",
+                  },
 
-                "&::-webkit-scrollbar-thumb": {
-                  boxShadow: "inset 0 0 40px 40px #BDBDBD",
-                  borderTop: "solid 6px transparent",
-                  borderBottom: "solid 6px transparent",
-                  borderRight: "solid 14px transparent",
-                },
-              }}
-            >
-              {options
-                .sort((a, b) => a.breedName.localeCompare(b.breedName))
-                .map((option) => (
-                  <Text
-                    fontSize="lg"
-                    borderRadius="6px"
-                    paddingX={4}
-                    _hover={{ backgroundColor: "rgba(151, 151, 151, 0.1)" }}
-                    key={option.id}
-                  >
-                    {option.breedName}
-                  </Text>
-                ))}
-            </Flex>
-          )}
+                  "&::-webkit-scrollbar-thumb": {
+                    boxShadow: "inset 0 0 40px 40px #BDBDBD",
+                    borderTop: "solid 6px transparent",
+                    borderBottom: "solid 6px transparent",
+                    borderRight: "solid 14px transparent",
+                  },
+                }}
+              >
+                {options
+                  .sort((a, b) => a.breedName.localeCompare(b.breedName))
+                  .map((option) => (
+                    <Text
+                      onClick={() => navigate(`/breed-${option.id}`)}
+                      fontSize="lg"
+                      borderRadius="6px"
+                      paddingX={4}
+                      _hover={{ backgroundColor: "rgba(151, 151, 151, 0.1)" }}
+                      key={option.id}
+                    >
+                      {option.breedName}
+                    </Text>
+                  ))}
+              </Flex>
+            )}
+          </VStack>
         </VStack>
       </Container>
       <VStack
