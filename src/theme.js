@@ -9,7 +9,7 @@ const theme = {
   },
   sizes: {
     container: {
-      xl: "1920px",
+      xl: "1840px",
     },
   },
 };
