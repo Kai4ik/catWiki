@@ -14,7 +14,6 @@ const Footer = () => {
         p={8}
         pl={12}
         gridRowGap="14px"
-        w="100%"
       >
         <StaticImage
           src="../images/CatwikiLogoWhite.svg"
