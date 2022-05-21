@@ -1,54 +1,21 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# CatWiki
 
-## 🚀 Quick start
+- Static site about cats built using Gatsby SSG (static site generator) & Chakra UI.\
+  User can view more than 60 cat breeds, search for specific ones, and look at more detailed information about specific cat breeds.
 
-1.  **Create a Gatsby site.**
+This static site is hosted on the [Gatsby Cloud](https://catwiki.gatsbyjs.io/) platform.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+Build with:
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+- [Gatsby](https://www.gatsbyjs.com/)
+- [Chakra UI](https://chakra-ui.com/)
+- [gatsby-node-api](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/)
+- [gatsby-image-plugin](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/)
+- [gatsby-ssr-api](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/)
+- [gatsby-browser-api](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser)
 
-2.  **Start developing.**
+Cat API:
 
-    Navigate into your new site’s directory and start it up.
+- [TheCatApi](https://docs.thecatapi.com/)
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
-
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+Visit website - [https://shoppingifyapp.herokuapp.com/](https://catwiki.gatsbyjs.io/)
