@@ -18,4 +18,4 @@ Cat API:
 
 - [TheCatApi](https://docs.thecatapi.com/)
 
-Visit website - [https://shoppingifyapp.herokuapp.com/](https://catwiki.gatsbyjs.io/)
+Visit website - [https://catwiki.gatsbyjs.io/](https://catwiki.gatsbyjs.io/)
