@@ -1,6 +1,7 @@
 import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { VStack, HStack, Text, Container, Box, Stack } from "@chakra-ui/react";
+import Helmet from "react-helmet";
 
 const BreedPage = (props) => {
   const {
@@ -39,75 +40,80 @@ const BreedPage = (props) => {
   ];
 
   return (
-    <Stack
-      direction={["column", "row"]}
-      align="flex-start"
-      w={["100vw", "100%"]}
-      cursor="pointer"
-      marginY={14}
-    >
-      <Container
-        m={0}
-        p={0}
-        borderRadius="24px"
-        overflow="hidden"
-        textAlign="center"
-        maxW={["90%", "40%"]}
-      >
-        <GatsbyImage
-          alt={name}
-          image={imageData}
-          imgStyle={{ borderRadius: "24px" }}
-        />
-      </Container>
-      <VStack
+    <React.Fragment>
+      <Helmet>
+        <title> CatWiki - {name}</title>
+      </Helmet>
+      <Stack
+        direction={["column", "row"]}
         align="flex-start"
-        w={["94%", "70%"]}
-        spacing={8}
-        paddingX={[2, 16]}
+        w={["100vw", "100%"]}
+        cursor="pointer"
+        marginY={14}
       >
-        <Text fontSize="4xl" color="dark" fontWeight="600">
-          {name}
-        </Text>
-        <Text fontSize="2xl">{description}</Text>
-        {primaryCharacteristics.map((el, index) => (
-          <Stack
-            direction={["column", "row"]}
-            fontSize="xl"
-            w="100%"
-            key={index}
-          >
-            <Text fontWeight="700" minW="16%">
-              {el.characteristic}:
-            </Text>
-            <Text> {el.value} </Text>
-          </Stack>
-        ))}
-        {numericCharacteristics.map((el, index) => (
-          <Stack
-            direction={["column", "row"]}
-            fontSize="xl"
-            w="100%"
-            key={index}
-          >
-            <Text fontWeight="700" minW="16%">
-              {el.characteristic}:
-            </Text>
-            <HStack spacing={4}>
-              {Array.from([1, 2, 3, 4, 5], (v) => (
-                <Box
-                  key={v}
-                  h="12px"
-                  w={["50px", "60px"]}
-                  borderRadius="8px"
-                  bg={v <= el.value ? "#544439" : "#E0E0E0"}
-                ></Box>
-              ))}
-            </HStack>
-          </Stack>
-        ))}
-      </VStack>
-    </Stack>
+        <Container
+          m={0}
+          p={0}
+          borderRadius="24px"
+          overflow="hidden"
+          textAlign="center"
+          maxW={["90%", "40%"]}
+        >
+          <GatsbyImage
+            alt={name}
+            image={imageData}
+            imgStyle={{ borderRadius: "24px" }}
+          />
+        </Container>
+        <VStack
+          align="flex-start"
+          w={["94%", "70%"]}
+          spacing={8}
+          paddingX={[2, 16]}
+        >
+          <Text fontSize="4xl" color="dark" fontWeight="600">
+            {name}
+          </Text>
+          <Text fontSize="2xl">{description}</Text>
+          {primaryCharacteristics.map((el, index) => (
+            <Stack
+              direction={["column", "row"]}
+              fontSize="xl"
+              w="100%"
+              key={index}
+            >
+              <Text fontWeight="700" minW="16%">
+                {el.characteristic}:
+              </Text>
+              <Text> {el.value} </Text>
+            </Stack>
+          ))}
+          {numericCharacteristics.map((el, index) => (
+            <Stack
+              direction={["column", "row"]}
+              fontSize="xl"
+              w="100%"
+              key={index}
+            >
+              <Text fontWeight="700" minW="16%">
+                {el.characteristic}:
+              </Text>
+              <HStack spacing={4}>
+                {Array.from([1, 2, 3, 4, 5], (v) => (
+                  <Box
+                    key={v}
+                    h="12px"
+                    w={["50px", "60px"]}
+                    borderRadius="8px"
+                    bg={v <= el.value ? "#544439" : "#E0E0E0"}
+                  ></Box>
+                ))}
+              </HStack>
+            </Stack>
+          ))}
+        </VStack>
+      </Stack>
+    </React.Fragment>
   );
 };
 
