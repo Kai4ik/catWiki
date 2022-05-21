@@ -51,6 +51,7 @@ const BreedPage = (props) => {
         p={0}
         borderRadius="24px"
         overflow="hidden"
+        textAlign="center"
         maxW={["90%", "40%"]}
       >
         <GatsbyImage

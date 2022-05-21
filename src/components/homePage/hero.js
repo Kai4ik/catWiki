@@ -55,7 +55,7 @@ const Hero = () => {
     <VStack w="100%" borderRadius="24px" overflow="hidden" mt={6}>
       <Container maxW="100%" pos="relative" p={0} h={["400px", "600px"]}>
         <StaticImage
-          aspectRatio={4 / 2}
+          aspectRatio={3 / 1}
           alt=""
           src={"../../images/HeroImage.png"}
           style={{ height: "100%" }}
@@ -159,11 +159,6 @@ const Hero = () => {
         align="flex-start"
         spacing={45}
       >
-        <Text fontSize="xl" fontWeight={500} cursor="pointer">
-          <span style={{ borderBottom: "2px solid #291507" }}>Most </span>
-          Searched Breeds {"   "}
-          <ArrowForwardIcon />
-        </Text>
         <Flex
           justify="space-between"
           align={["flex-start", "center"]}
@@ -190,7 +185,7 @@ const Hero = () => {
           gridRowGap="30px"
         >
           {dataToShow.map((el) => (
-            <VStack key={el.id} align="flex-start" w="45%">
+            <VStack key={el.id} align="flex-start" w={["48%", "24%"]}>
               <Link to={`/breed-${el.id}`}>
                 <Center borderRadius="24px" overflow="hidden" cursor="pointer">
                   <GatsbyImage
