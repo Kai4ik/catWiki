@@ -11,8 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { StaticImage, GatsbyImage } from "gatsby-plugin-image";
 import { Search2Icon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Link } from "gatsby";
-import { navigate } from "gatsby";
+import { Link, navigate } from "gatsby";
 
 // app context pass to useContext hook
 import { AppContext } from "../../context/index";
